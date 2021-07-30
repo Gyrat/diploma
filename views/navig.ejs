@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Заславская городская </br> взрослая поликлиника</a>
+    <button
+       class="navbar-toggler"
+       type="button"
+       data-toggle="collapse"
+       data-target="#navbarSupportedContent"
+       aria-controls="navbarSupportedContent"
+       aria-expanded="false"
+       aria-label="Toggle navigation"
+       >
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+       <li class="nav-item active">
+          <a class="nav-link" href="../">Главная</a>
+       </li>
+       <% for(var i = 0; i < tab.length; i++) { %>
+       <li class="nav-item dropdown">
+          <a
+             class="nav-link active dropdown-toggle"
+             href="#"
+             id="navbarDropdown"
+             role="button"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+             >
+             <%= tab[i].name %>
+          </a>
+          
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <% for(var j = 0; j < names.length; j++) { %>
+                <% if (names[j].tab_id == tab[i].id) {%>
+             <a class="dropdown-item" href="/page/<%= names[j].id %>">
+                   <%= names[j].name %>
+             </a>
+                <% } %>
+             <% } %>
+          </div>
+       </li>
+       <% } %>
+       <li class="nav-item active">
+       </li>
+       </ul>
+
+      <div class="btn-group dropleft">
+         <%if(!usr){%>
+         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Войти
+         </button>
+         <div class="dropdown-menu">
+            <a class="dropdown-item" href="/signin">Авторизация</a>
+            <a class="dropdown-item" href="/signup">Регистрация</a>
+         </div>
+      <%} else {%>     
+         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%=usr[0].surname%> <%=usr[0].name[0]%>. <%=usr[0].patronymic[0]%>.
+         </button>
+         <div class="dropdown-menu">
+            <a class="dropdown-item" href="/acc">Личный кабинет</a>
+            <a class="dropdown-item" href="/logout">Выйти</a>
+         </div>    
+      <% } %>       
+      </div>
+    </div>
+ </nav>

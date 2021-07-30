@@ -1,0 +1,20 @@
+<%- include('_header') -%>
+<%- include('navig') -%>
+
+<div class="container">
+<h1>Авторизация</h1>
+<form method="post" action="/signin">
+  <p>
+    <label>Адрес электронной почты :</label><br>
+    <input type="email" name="e_mail" required>
+  </p>
+  <p>
+    <label>Пароль :</label><br>
+    <input type="text" name="pass_hash" required>
+  </p>
+  <p>
+    <input class="btn btn-info" type="submit" value="Войти">
+  </p>
+</form>
+</div>
+<%- include('footer') -%>

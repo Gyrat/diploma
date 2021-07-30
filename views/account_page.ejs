@@ -1,0 +1,59 @@
+<%- include('_header') -%>
+<%- include('navig') -%>
+
+<div class="container">
+  <h4>
+    <%=resuser[0].surname%> <%=resuser[0].name%> <%=resuser[0].patronymic%> - Личный кабинет
+  </h4>
+  <div class="row">
+    <div class="col-md-7">
+      <h5>Талоны</h5>
+      <% for(var j = 0; j < vouch.length; j++) { %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+          <%= vouch[j].surname %> <%= vouch[j].name %>  <%= vouch[j].patronymic %> <div>№<%=vouch[j].number%> <%= vouch[j].time %> <%= vouch[j].date.toLocaleDateString() %></div>
+          </div>
+          <div class="col-md-5">
+            <form method="post">
+              <div class="form-group">
+                <input type="hidden" name="id" value="<%= vouch[j].delete_id %>">
+                <input type="hidden" name="ass" value="1">
+              </div>
+              <button type="submit" class="btn btn-info">отменить</button>
+            </form>
+            </div>
+        </div>
+        <hr>
+      </div>  
+      <% } %>
+
+    </div>     
+
+    <div class="col-md-5">
+      <h5>Выписки из медицинских документов и 
+      справки о состоянии здоровья</h5>
+      <% for(var j = 0; j < extract.length; j++) { %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <div><%= extract[j].type %></div> <div><%= extract[j].target %></div> <div>Статус: <%= extract[j].is_done %></div> 
+          </div>
+          <div class="col-md-5">
+            <form method="post">
+              <div class="form-group">
+                <input type="hidden" name="id" value="<%= extract[j].id %>">
+                <input type="hidden" name="ass" value="2">
+              </div>
+              <button type="submit" class="btn btn-info">отменить</button>
+            </form>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <% } %>
+    </div> 
+  </div>
+</div>
+
+<%- include('footer') -%>

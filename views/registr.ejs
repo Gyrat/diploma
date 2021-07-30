@@ -1,0 +1,36 @@
+<%- include('_header') -%>
+<%- include('navig') -%>
+
+<div class="container">
+<h1>Регистрация</h1>
+<form method="post" action="/signup">
+  <p>
+    <label>Фамилия :</label><br>
+    <input type="text" name="surname" required>
+  </p>  
+  <p>
+    <label>Имя :</label><br>
+    <input type="text" name="name" required>
+  </p>
+  <p>
+    <label>Отчество :</label><br>
+    <input type="text" name="patronymic">
+  </p>
+  <p>
+    <label>Код медицинской карты :</label><br>
+    <input type="text" name="card_code" required pattern="[1-9][-][а-я][-][1-9][0-9]*">
+  </p>
+  <p>
+    <label>Адрес электронной почты :</label><br>
+    <input type="email" name="e_mail" required>
+  </p>
+  <p>
+    <label>Пароль :</label><br>
+    <input type="text" name="pass_hash" required>
+  </p>
+  <p>
+    <input class="btn btn-info" type="submit" value="Зарегистироваться">
+  </p>
+</form>
+</div>
+<%- include('footer') -%>

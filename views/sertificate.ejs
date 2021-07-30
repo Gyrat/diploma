@@ -1,0 +1,25 @@
+<%- include('_header') -%>
+<%- include('navig') -%>
+<div class="container">
+<form method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Медицинская справка о состоянии здоровья</label>
+    <input type="hidden" name="type" value="справка">
+    <input type="text" class="form-control" name="for" placeholder="Введите цель выдачи справки"> 
+    <label for="one">Примеры: для поступления в институт, для санаторно-курортного лечения</label>
+  </div>
+  <button type="submit" class="btn btn-info">Заказать справку</button>
+</form>
+</br>
+<form method="post">
+  <div class="form-group">
+    <label for="exampleInputPassword1">Выписка из медицинских документов</label>
+    <input type="hidden" name="type" value="выписка">
+    <input type="text" class="form-control" name="for" placeholder="Место предоставления">
+    <label for="one">Примеры: ЧУП "Хмарка", ООО "МАКАРЕНА"</label>
+  </div>
+  <button type="submit" class="btn btn-info">Заказать выписку</button>
+</form>
+</div>
+
+<%- include('footer') -%>

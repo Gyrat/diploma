@@ -1,0 +1,93 @@
+<%- include('_header') -%>
+<%- include('navig') -%>
+<div class="container">
+<div id="accordion">
+  <% for(var i = 0; i < spec.length; i++) { %>
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapseOne">
+           <span style="color: black; font-weight:bold;"><%= spec[i].name %> </span>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse<%= i %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <!-- doc -->
+        <div id="accordion1">
+          <% for(var j = 0; j < doctor.length; j++) { %>
+          <% if (doctor[j].specialization_id == spec[i].id){%>
+          <div class="card">
+            <div class="card-header" id="heading1">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1<%= j %>" aria-expanded="false" aria-controls="collapseOne">
+                   <span style="color: black; font-weight:bold;"><%= doctor[j].surname %> <%= doctor[j].name %> <%= doctor[j].patronymic %> </span>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapse1<%= j %>" class="collapse" aria-labelledby="heading1" data-parent="#accordion1">
+              <div class="card-body">
+                <!-- timetable -->
+                <div id="accordion2">
+                  <% for(var k = 0; k < timetable.length; k++) { %>
+                    <% if (timetable[k].doctor_id == doctor[j].id){%>
+                  <div class="card">
+                    <div class="card-header" id="heading2">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3<%= k %>" aria-expanded="false" aria-controls="collapseOne">
+                           <span style="color: black; font-weight:bold;">кабинет№<%= timetable[k].number%> <%= timetable[k].date.toLocaleDateString() %> </span>
+                        </button>
+                      </h5>
+                    </div>
+                
+                    <div id="collapse3<%= k %>" class="collapse" aria-labelledby="heading2" data-parent="#accordion2">
+                      <div class="card-body">
+                      <!-- time -->
+                        <% let time; 
+                          if (timetable[k].shift_id == 1){
+                          time = ['8:00','8:15','8:30','8:45','9:00','9:15','9:30','9:45','10:00','10:15','10:30','10:45','11:00','11:15','11:30','11:45','12:00','12:15','12:30','12:45','13:00','13:15','13:30','13:45'];
+                        } else { time = ['14:00','14:15','14:30','14:45','15:00','15:15','15:30','15:45','16:00','16:15','16:30','16:45','17:00','17:15','17:30','17:45','18:00','18:15','18:30','18:45','19:00','19:15','19:30','19:45']}%>
+                        <% let number = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];%>
+                        <% for(var y = 0; y < voucher.length; y++) { %>
+       
+                          <% if ((voucher[y].timetable_id == timetable[k].table_id) && time.includes(voucher[y].time)) { %>
+                            <% time.splice(time.indexOf(voucher[y].time), 1); %>
+                            <% number.splice(number.indexOf(voucher[y].number), 1); } %>
+                        <% } %>
+                        <div class = "row">
+                        <% for(var x = 0; x < time.length; x++) { %>
+                          <div class="col-1">
+                          <form method="post" action="voucher/add">
+                            <input type="hidden" name="timetable_id" value="<%=timetable[k].table_id%>">
+                            <input type="hidden" name="number" value="<%=number[x]%>">
+                            <button type="submit" name="time" value="<%=time[x]%>" class="btn btn-info">
+                              №<%=number[x]%> <%=time[x]%>
+                            </button>
+                          </form>
+                          </div>
+                        <% } %> 
+                        </div>                               
+                      <!-- time -->
+                     </div>
+                    </div>
+                  </div>
+                  <% } %> 
+                  <% } %> 
+               </div>
+                <!-- timetable -->
+             </div>
+            </div>
+          </div>
+          <% } %> 
+          <% } %> 
+       </div>
+        <!-- doc -->
+     </div>
+    </div>
+  </div>
+  <% } %> 
+</div>
+</div>
+<%- include('footer') -%>
